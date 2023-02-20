@@ -114,5 +114,6 @@ class PolicyIteration(Agent):
         return {
             "utilities": utilities,
             "policy": policy,
-            "iterations": iterations
+            "iterations": iterations,
+            "algorithm": "policy_iteration"
         }

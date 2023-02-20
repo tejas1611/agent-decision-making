@@ -1,6 +1,6 @@
 import pygame
 from typing import *
-from env_config import (POLICY_FONT, POLICY_FONT_SIZE, POLICY_OFFSET,
+from config import (POLICY_FONT, POLICY_FONT_SIZE, POLICY_OFFSET,
                         UTILITY_FONT, UTILITY_FONT_SIZE, UTILITY_OFFSET,
                         block_size, height, width, grid)
 
@@ -41,19 +41,19 @@ class DisplayManager(object):
         return colors
 
     def display(self, result: dict):
+        algorithm = result['algorithm']
+
         # Display utilities
         utilities = [["{:.3f}".format(cell) for cell in row] for row in result['utilities']]
-        font = pygame.font.Font(UTILITY_FONT, int(UTILITY_FONT_SIZE))
-        self.generate(array=utilities, grid=grid, offset=UTILITY_OFFSET, font=font,
-                      title='Value Iteration Utilities', save=True, file_name='vi_utilities.png')
+        self.generate(array=utilities, grid=grid, offset=UTILITY_OFFSET, font=pygame.font.SysFont(UTILITY_FONT, UTILITY_FONT_SIZE),
+                      title=f'{algorithm} Utilities', save=True, file_name=f'{algorithm}_utilities.png')
 
         # Display policies
         CONVERT_POLICY_TUPLE = {(1, 0): '↓', (-1, 0): '↑', (0, 1): '→', (0, -1): '←'}
         directions = [[CONVERT_POLICY_TUPLE[cell.value] if cell else cell 
                         for cell in row] for row in result['policy']]
-        font = pygame.font.Font(POLICY_FONT, int(POLICY_FONT_SIZE))
-        self.generate(array=directions, grid=grid, offset=POLICY_OFFSET, font=font,
-                      title='Value Iteration Policy', save=True, file_name='vi_policy.png')
+        self.generate(array=directions, grid=grid, offset=POLICY_OFFSET, font=pygame.font.SysFont(POLICY_FONT, POLICY_FONT_SIZE),
+                      title=f'{algorithm} Policy', save=True, file_name=f'{algorithm}_policy.png')
 
     def generate(self, array, grid, offset: Tuple, font: pygame.font.Font, title: str = 'Plot', 
                     save: bool = False, file_name: str = 'image.png'):
@@ -80,8 +80,8 @@ class DisplayManager(object):
                     if grid[row][col] == 'W':
                         continue
                     message = font.render(array[row][col], True, (0, 0, 0))
-                    screen.blit(message, (col * self.block_size +
-                                offset[0] * DisplayManager.RATIO, row * self.block_size + offset[1] * DisplayManager.RATIO))
+                    screen.blit(message, (col * self.block_size + offset[0] * DisplayManager.RATIO, 
+                                    row * self.block_size + offset[1] * DisplayManager.RATIO))
 
             pygame.display.update()
 

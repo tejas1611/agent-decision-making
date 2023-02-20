@@ -1,11 +1,11 @@
 from display_manager import DisplayManager
-from env_config import actions, generate_random_environment, grid, rewards
+from config import actions, generate_random_environment, grid, rewards
 from environment import Environment
 from policy_iteration import PolicyIteration
 from value_iteration import ValueIteration
 
-algorithm = "value_iteration"
-# algorithm = "policy_iteration"
+# algorithm = "value_iteration"
+algorithm = "policy_iteration"
 
 
 def generate_grid():
@@ -27,4 +27,4 @@ if __name__ == "__main__":
         agent = PolicyIteration(actions=actions, k=300, gamma=0.99)
         result = agent.solve(env)
 
-        print(result)
+        DisplayManager().display(result)

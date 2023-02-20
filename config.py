@@ -55,12 +55,12 @@ actions = {
 ################################################################
 
 RATIO = 1
-UTILITY_FONT_SIZE = 15 * RATIO
+UTILITY_FONT_SIZE = 14 * RATIO
 UTILITY_OFFSET = (4, 14)
 POLICY_FONT_SIZE = 30 * RATIO
-POLICY_OFFSET = (17, 5)
-POLICY_FONT = "assets/seguisym.ttf"
-UTILITY_FONT = "assets/seguisym.ttf"
+POLICY_OFFSET = (11, 5)
+POLICY_FONT = "Calibri"
+UTILITY_FONT = "Calibri"
 
 block_size=50
 width=300

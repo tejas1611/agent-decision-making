@@ -90,5 +90,6 @@ class ValueIteration(Agent):
         return {
             "utilities": utilities,
             "policy": policy,
-            "iterations": iterations
+            "iterations": iterations,
+            "algorithm": "value_iteration"
         }

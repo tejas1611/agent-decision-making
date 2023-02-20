@@ -11,7 +11,7 @@ class Environment:
     def __init__(self, grid_world: List[List], rewards: List[List], initial_state: Tuple):
         self.generate_environment(grid_world, rewards, initial_state)
 
-    def generate_environment(self, grid_world: List[List], rewards: List[List], initial_state: Tuple) -> Tuple(Tuple, float):
+    def generate_environment(self, grid_world: List[List], rewards: List[List], initial_state: Tuple) -> Tuple[Tuple, float]:
         self.grid_world: List[List] = grid_world
         self.grid_width = len(grid_world[-1])
         self.grid_height = len(grid_world)
@@ -64,7 +64,7 @@ class Environment:
 
         return dict(model)
 
-    def step(self, state: Tuple, action: Tuple) -> Tuple(Tuple, float):
+    def step(self, state: Tuple, action: Tuple) -> Tuple[Tuple, float]:
         """
         Return next state and reward when agent takes an action in current state
 

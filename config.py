@@ -7,7 +7,6 @@
 #   Feel free to modify the grid world in any way
 ################################################################
 
-generate_random_environment = False
 grid = [
     ['G','W','G','Wh','Wh', 'G'],
     ['Wh','R','Wh','G','W', 'R'],
@@ -63,5 +62,3 @@ POLICY_FONT = "Calibri"
 UTILITY_FONT = "Calibri"
 
 block_size=50
-width=300
-height=300

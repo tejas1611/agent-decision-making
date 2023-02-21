@@ -2,7 +2,7 @@ import pygame
 from typing import *
 from config import (POLICY_FONT, POLICY_FONT_SIZE, POLICY_OFFSET,
                         UTILITY_FONT, UTILITY_FONT_SIZE, UTILITY_OFFSET,
-                        block_size, height, width, grid)
+                        block_size)
 
 pygame.init()
 
@@ -17,12 +17,12 @@ class DisplayManager(object):
 
     RATIO = 1
 
-    def __init__(self) -> None:
+    def __init__(self, height: int, width: int) -> None:
         super().__init__()
         self.block_size = block_size
-        self.width = width
-        self.height = height
-        self.screen_dimensions = (width, height)
+        self.width = block_size * width
+        self.height = block_size * height
+        self.screen_dimensions = (self.width, self.height)
 
     def get_colors_for_grid(self, grid):
         colors = []
@@ -45,15 +45,15 @@ class DisplayManager(object):
 
         # Display utilities
         utilities = [["{:.3f}".format(cell) for cell in row] for row in result['utilities']]
-        self.generate(array=utilities, grid=grid, offset=UTILITY_OFFSET, font=pygame.font.SysFont(UTILITY_FONT, UTILITY_FONT_SIZE),
-                      title=f'{algorithm} Utilities', save=True, file_name=f'{algorithm}_utilities.png')
+        self.generate(array=utilities, grid=result["grid"], offset=UTILITY_OFFSET, font=pygame.font.SysFont(UTILITY_FONT, UTILITY_FONT_SIZE),
+                      title=f'{algorithm} Utilities', save=True, file_name=f'docs/{algorithm}_utilities.png')
 
         # Display policies
         CONVERT_POLICY_TUPLE = {(1, 0): '↓', (-1, 0): '↑', (0, 1): '→', (0, -1): '←'}
         directions = [[CONVERT_POLICY_TUPLE[cell.value] if cell else cell 
                         for cell in row] for row in result['policy']]
-        self.generate(array=directions, grid=grid, offset=POLICY_OFFSET, font=pygame.font.SysFont(POLICY_FONT, POLICY_FONT_SIZE),
-                      title=f'{algorithm} Policy', save=True, file_name=f'{algorithm}_policy.png')
+        self.generate(array=directions, grid=result["grid"], offset=POLICY_OFFSET, font=pygame.font.SysFont(POLICY_FONT, POLICY_FONT_SIZE),
+                      title=f'{algorithm} Policy', save=True, file_name=f'docs/{algorithm}_policy.png')
 
     def generate(self, array, grid, offset: Tuple, font: pygame.font.Font, title: str = 'Plot', 
                     save: bool = False, file_name: str = 'image.png'):

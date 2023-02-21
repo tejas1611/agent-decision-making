@@ -1,11 +1,11 @@
 import argparse
 
 from config import actions, grid, rewards
-from display_manager import DisplayManager
-from environment import Environment
-from policy_iteration import PolicyIteration
-from value_iteration import ValueIteration
-from custom_grid import generate_grid
+from models.display_manager import DisplayManager
+from models.environment import Environment
+from algos.policy_iteration import PolicyIteration
+from algos.value_iteration import ValueIteration
+from models.custom_grid import generate_grid
 
 
 def parse_args():

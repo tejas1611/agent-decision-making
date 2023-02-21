@@ -1,6 +1,6 @@
-from agent import Agent
+from models.agent import Agent
 from enum import Enum
-from environment import Environment
+from models.environment import Environment
 import numpy as np
 import random
 from typing import *

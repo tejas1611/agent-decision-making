@@ -1,5 +1,5 @@
-from agent import Agent
-from environment import Environment
+from models.agent import Agent
+from models.environment import Environment
 import numpy as np
 from enum import Enum
 from typing import *

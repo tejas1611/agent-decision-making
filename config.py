@@ -1,12 +1,8 @@
 ################################################################
-#   Environment of the assignment
+#   Config Variables for the Environment of the assignment
 ################################################################
 
-################################################################
-#   Grid World
-#   Feel free to modify the grid world in any way
-################################################################
-
+# Grid World
 grid = [
     ['G','W','G','Wh','Wh', 'G'],
     ['Wh','R','Wh','G','W', 'R'],
@@ -17,28 +13,18 @@ grid = [
 ]
 
 
-################################################################
-#   Rewards
-#   Feel free to modify the rewards in any way
-#   Make sure the reward array has the same shape
-#   as the grid array
-################################################################
-
+# Rewards
 reward_map = {'G': +1, 'R': -1, 'W': 0, 'Wh': -0.04}
-
 rewards = [[reward_map[cell] for cell in row] for row in grid]
 
-################################################################
-#   Actions
-#   The actions are NORTH, SOUTH, EAST and WEST
-#   Each action is represented by a tuple
-#   
-#   NORTH: (-1, 0)
-#   SOUTH: (1, 0)
-#   EAST:  (0, 1)
-#   WEST:  (0, -1)
-################################################################
 
+# Actions
+'''
+    UP: (-1, 0)
+    DOWN: (1, 0)
+    RIGHT:  (0, 1)
+    LEFT:  (0, -1)
+'''
 actions = {
     "UP": (-1, 0), 
     "DOWN": (1, 0), 
@@ -46,13 +32,8 @@ actions = {
     "LEFT": (0, -1)
 }
 
-################################################################
-#   Pygame Display Settings
-#   Feel free to modify the rewards in any way
-#   Make sure the reward array has the same shape
-#   as the grid array
-################################################################
 
+# Pygame Display Settings
 RATIO = 1
 UTILITY_FONT_SIZE = 14 * RATIO
 UTILITY_OFFSET = (4, 14)
@@ -62,3 +43,6 @@ POLICY_FONT = "Calibri"
 UTILITY_FONT = "Calibri"
 
 block_size=50
+
+# Random Grid Generator
+SEED = 1

@@ -17,12 +17,13 @@ class DisplayManager(object):
 
     RATIO = 1
 
-    def __init__(self, height: int, width: int) -> None:
+    def __init__(self, height: int, width: int, output: str) -> None:
         super().__init__()
         self.block_size = block_size
         self.width = block_size * width
         self.height = block_size * height
         self.screen_dimensions = (self.width, self.height)
+        self.output = output
 
     def get_colors_for_grid(self, grid):
         colors = []
@@ -46,14 +47,14 @@ class DisplayManager(object):
         # Display utilities
         utilities = [["{:.3f}".format(cell) for cell in row] for row in result['utilities']]
         self.generate(array=utilities, grid=result["grid"], offset=UTILITY_OFFSET, font=pygame.font.SysFont(UTILITY_FONT, UTILITY_FONT_SIZE),
-                      title=f'{algorithm} Utilities', save=True, file_name=f'docs/{algorithm}_utilities.png')
+                      title=f'{algorithm} Utilities', save=True, file_name=f'docs/{algorithm}_utilities_{self.output}.png')
 
         # Display policies
         CONVERT_POLICY_TUPLE = {(1, 0): '↓', (-1, 0): '↑', (0, 1): '→', (0, -1): '←'}
         directions = [[CONVERT_POLICY_TUPLE[cell.value] if cell else cell 
                         for cell in row] for row in result['policy']]
         self.generate(array=directions, grid=result["grid"], offset=POLICY_OFFSET, font=pygame.font.SysFont(POLICY_FONT, POLICY_FONT_SIZE),
-                      title=f'{algorithm} Policy', save=True, file_name=f'docs/{algorithm}_policy.png')
+                      title=f'{algorithm} Policy', save=True, file_name=f'docs/{algorithm}_policy_{self.output}.png')
 
     def generate(self, array, grid, offset: Tuple, font: pygame.font.Font, title: str = 'Plot', 
                     save: bool = False, file_name: str = 'image.png'):

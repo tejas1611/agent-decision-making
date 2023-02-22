@@ -1,7 +1,8 @@
 import argparse
 
-from config import actions, grid, rewards
-from models.display_manager import DisplayManager
+from config import actions, grid, rewards, SEED
+from dataanalysis_manager import DataAnalysisManager
+from display_manager import DisplayManager
 from models.environment import Environment
 from algos.policy_iteration import PolicyIteration
 from algos.value_iteration import ValueIteration
@@ -26,11 +27,12 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
-    
-    if args.random_grid:
+    file_name = "assgn1"
+    if args.random_grid == "True":
         grid, rewards = generate_grid(grid_height=20, grid_width=20,
                             prob_green=0.166, prob_red=0.166,
                             prob_wall=0.168, prob_white=0.5)
+        file_name = "random" + str(SEED)
     
     algorithm = args.algorithm
     env = Environment(grid_world=grid, rewards=rewards, initial_state=(len(grid)-1, 0))
@@ -43,14 +45,20 @@ if __name__ == "__main__":
         if args.debug:
             print(grid, result)
 
-        DisplayManager(height=len(grid), width=len(grid[0])).display(result)
+        DisplayManager(height=len(grid), width=len(grid[0]), output=file_name).display(result)
+        DataAnalysisManager(algorithm=result['algorithm'], output=file_name).save(agent.get_data())
 
     elif algorithm == "policy_iteration":
-        agent = PolicyIteration(actions=actions, k=300, gamma=0.99)
+        agent = PolicyIteration(actions=actions, k=100, gamma=0.99)
         result = agent.solve(env)
         result["grid"] = grid
 
         if args.debug:
             print(grid, result)
 
-        DisplayManager(height=len(grid), width=len(grid[0])).display(result)
+        DisplayManager(height=len(grid), width=len(grid[0]), output=file_name).display(result)
+        DataAnalysisManager(algorithm=result['algorithm'], output=file_name).save(agent.get_data())
+
+    else:
+        print("INVALID ALGORITHM")
+        print("Options: value_iteration | policy_iteration")

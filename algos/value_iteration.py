@@ -1,3 +1,4 @@
+from collections import defaultdict
 from models.agent import Agent
 from models.environment import Environment
 import numpy as np
@@ -17,6 +18,8 @@ class ValueIteration(Agent):
         super().__init__(actions)
         self.gamma = gamma
         self.epsilon = epsilon
+
+        self.data_analysis = defaultdict(list)
 
     def solve_utilities(self, env: Environment) -> Tuple[np.ndarray, int]:
         utilities: np.ndarray = np.zeros((env.grid_height, env.grid_width), dtype=np.float64)
@@ -54,6 +57,9 @@ class ValueIteration(Agent):
 
                     # Update delta
                     delta = max(delta, abs(new_utilities[i][j] - utilities[i][j]))
+
+                    # Append state utility for analysis
+                    self.data_analysis[str((j,i))].append(new_utilities[i][j])
 
             utilities = new_utilities.copy()
 
@@ -93,3 +99,6 @@ class ValueIteration(Agent):
             "iterations": iterations,
             "algorithm": "value_iteration"
         }
+
+    def get_data(self) -> dict:
+        return dict(self.data_analysis)

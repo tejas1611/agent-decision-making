@@ -1,3 +1,4 @@
+from collections import defaultdict
 from models.agent import Agent
 from enum import Enum
 from models.environment import Environment
@@ -18,6 +19,8 @@ class PolicyIteration(Agent):
         super().__init__(actions)
         self.gamma = gamma
         self.k = k
+
+        self.data_analysis = defaultdict(list)
 
     def policy_evaluation(self, policy: List[List], utilities: np.ndarray, env: Environment) -> Tuple[np.ndarray, int]:
         """
@@ -63,6 +66,9 @@ class PolicyIteration(Agent):
 
                     # Bellman Update
                     new_utilities[i][j] = reward + self.gamma * action_expected_utility
+                    
+                    # Append state utility for analysis
+                    self.data_analysis[str((j,i))].append(new_utilities[i][j])
 
             utilities = new_utilities.copy()
 
@@ -117,3 +123,6 @@ class PolicyIteration(Agent):
             "iterations": iterations,
             "algorithm": "policy_iteration"
         }
+
+    def get_data(self) -> dict:
+        return dict(self.data_analysis)

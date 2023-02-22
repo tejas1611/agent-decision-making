@@ -1,8 +1,9 @@
 import numpy as np
 from typing import *
+from config import SEED
 
 # Set seed for reproducability
-np.random.seed(1)
+np.random.seed(SEED)
 
 def generate_grid(grid_height: int, grid_width: int, prob_green: float = 0.166, prob_red: float = 0.166, 
                     prob_wall: float = 0.168, prob_white: float = 0.5) -> Tuple[List[List], List[List]]:

@@ -3,3 +3,5 @@ __pycache__
 .vscode
 *.png
 *.csv
+.ipynb_checkpoints
+*.jpg

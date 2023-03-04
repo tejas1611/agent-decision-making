@@ -1,10 +1,12 @@
-from collections import defaultdict
-from models.agent import Agent
-from enum import Enum
-from models.environment import Environment
-import numpy as np
 import random
+from collections import defaultdict
+from enum import Enum
 from typing import *
+
+import numpy as np
+
+from models.agent import Agent
+from models.environment import Environment
 
 
 class PolicyIteration(Agent):

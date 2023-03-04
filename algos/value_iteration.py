@@ -1,9 +1,11 @@
 from collections import defaultdict
-from models.agent import Agent
-from models.environment import Environment
-import numpy as np
 from enum import Enum
 from typing import *
+
+import numpy as np
+
+from models.agent import Agent
+from models.environment import Environment
 
 
 class ValueIteration(Agent):

@@ -1,12 +1,12 @@
 import argparse
 
-from config import actions, grid, rewards, SEED
-from dataanalysis_manager import DataAnalysisManager
-from display_manager import DisplayManager
-from models.environment import Environment
 from algos.policy_iteration import PolicyIteration
 from algos.value_iteration import ValueIteration
-from models.custom_grid import generate_grid
+from config import SEED, actions, grid, rewards
+from manager.custom_grid import generate_grid
+from manager.dataanalysis_manager import DataAnalysisManager
+from manager.display_manager import DisplayManager
+from models.environment import Environment
 
 
 def parse_args():
@@ -49,7 +49,7 @@ if __name__ == "__main__":
         DataAnalysisManager(algorithm=result['algorithm'], output=file_name).save(agent.get_data())
 
     elif algorithm == "policy_iteration":
-        agent = PolicyIteration(actions=actions, k=100, gamma=0.99)
+        agent = PolicyIteration(actions=actions, k=300, gamma=0.99)
         result = agent.solve(env)
         result["grid"] = grid
 

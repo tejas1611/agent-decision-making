@@ -2,6 +2,9 @@ from enum import Enum
 
 
 class Agent:
+    """
+    Abstract class representing Agent object.
+    """
     def __init__(self, actions: dict):
         self.ACTIONS = Enum('ACTIONS', actions)
 

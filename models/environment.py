@@ -4,9 +4,11 @@ from typing import *
 
 
 class Environment:
-    '''
-    Contains: States, Transformer function, Step & Reward, Initial state
-    '''
+    """
+    Abstract class representing Environment object.
+    Initialized with grid world states, rewards, and agent's initial state.
+    Contains State Transformer function and Step function.
+    """
 
     def __init__(self, grid_world: List[List], rewards: List[List], initial_state: Tuple):
         self.generate_environment(grid_world, rewards, initial_state)

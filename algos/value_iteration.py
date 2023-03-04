@@ -68,6 +68,17 @@ class ValueIteration(Agent):
         return utilities, iterations
 
     def solve_optimal_policy(self, utilities: np.ndarray, env: Environment) -> np.ndarray:
+        """
+        Function that calculates best policy by maximizing expected utility
+        based on the utilities provided
+
+        Args:
+            utilities (np.ndarray): Current utilities
+            env (Environment): Environment object defining the states and transformer model
+
+        Returns:
+            Optimal policies of all states
+        """
         policy = [[None for _ in range(env.grid_width)] for _ in range(env.grid_height)]
 
         # Iterate through every state in environment
@@ -92,6 +103,15 @@ class ValueIteration(Agent):
         return policy
 
     def solve(self, env: Environment) -> dict:
+        """
+        Main function that calculates final utilities and policies of all states
+
+        Args:
+            env (Environment): Environment object defining the states and transformer model
+
+        Returns:
+            Results including final utilities, optimal policies, no. of iterations
+        """
         utilities, iterations = self.solve_utilities(env)
         policy = self.solve_optimal_policy(utilities, env)
 

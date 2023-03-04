@@ -2,6 +2,11 @@
 #   Config Variables for the Environment of the assignment
 ################################################################
 
+
+# Random Grid Generator
+SEED = 1
+
+
 # Grid World
 grid = [
     ['G','W','G','Wh','Wh', 'G'],
@@ -43,6 +48,3 @@ POLICY_FONT = "Calibri"
 UTILITY_FONT = "Calibri"
 
 block_size=50
-
-# Random Grid Generator
-SEED = 1

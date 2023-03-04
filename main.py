@@ -10,7 +10,8 @@ from models.environment import Environment
 
 
 def parse_args():
-    """ Parse command line arguments.
+    """
+    Parse command line arguments.
     """
     parser = argparse.ArgumentParser(description="Deep Colorizer")
     parser.add_argument(

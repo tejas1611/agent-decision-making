@@ -77,6 +77,17 @@ class PolicyIteration(Agent):
         return utilities, iterations
 
     def policy_improvement(self, policy: List[List], utilities: np.ndarray, env: Environment) -> Tuple[List[List], bool]:
+        """
+        Update policy for state by maximizing expected utility
+
+        Args:
+            policy (List[List]): Current policies
+            utilities (np.ndarray): Current utilities
+            env (Environment): Environment object defining the states and transformer model 
+
+        Returns:
+            Updated policies + boolean for whether policy has changed
+        """
         is_policy_unchanged = True
         
         # Iterate through every state in environment
@@ -104,6 +115,16 @@ class PolicyIteration(Agent):
         return policy, is_policy_unchanged
 
     def solve(self, env: Environment) -> dict:
+        """
+        Initializes random policies and utilities and alternates between
+        policy evaluation and imporvement steps until policy is unchanged
+
+        Args:
+            env (Environment): Environment object defining the states and transformer model
+
+        Returns:
+            Results including final utilities, optimal policies, no. of iterations
+        """
         # Initialize random policy 
         policy: List[List] = [[random.choice(list(self.ACTIONS)) for _ in range(env.grid_width)] for _ in range(env.grid_height)]
 
